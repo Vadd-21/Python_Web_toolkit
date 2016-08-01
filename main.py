@@ -3,6 +3,7 @@
 web frontend for SQL Queries of a backend database
 """
 from flask import Flask, render_template, request
+from scan import scanner
 
 app = Flask(__name__)
 
@@ -36,14 +37,11 @@ def scan():
     """
     defines a page
     """
-    target = '127.0.0.1'
-    s_port = "1"
-    e_port = "1234"
-    ports = ["22 open", "80 closed"]
+    target = request.form['target']
+    s_port = int(request.form['s_port'])
+    e_port = int(request.form['e_port'])
+    ports = scanner(target, s_port, e_port)
     if request.method == 'POST':
-        target = request.form['target']
-        s_port = request.form['s_port']
-        e_port = request.form['e_port']
         return render_template("scan_results.html", target=target, s_port=s_port, e_port=e_port, ports=ports)
     results = None
     return render_template("scanner.html", combatants=results)

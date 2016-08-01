@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TCP Port scanner</title>
+</head>
+<body>
+    <table border=1px>
+        <thead>
+            <tr>
+                <th>target = {{target}}</th>
+                <th>start port = {{s_port}}</th>
+                <th>end port = {{e_port}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for port in ports %}
+            <tr>
+                    <td>{{ port }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1><a href="/scanner">start</a></h1>
+
+</body>
+</html>

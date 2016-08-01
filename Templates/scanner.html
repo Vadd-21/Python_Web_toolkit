@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TCP Port scanner</title>
+</head>
+<body>
+	<table border=1px>
+		<thead>
+			<tr>
+				<th>target ip address</th>
+				<th>start port</th>
+				<th>end port</th>
+			</tr>
+		</thead>
+		<form action="scan_results" method="post">
+		<tbody>
+			<tr>
+				<td><input type="text", name='target', placeholder="127.0.0.1"></td>
+				<td><input type="text", name='s_port', placeholder="1"></td>
+				<td><input type="text", name='e_port', placeholder="1234"></td>
+				<td><input type="submit"></td>
+			</tr>
+		</tbody>
+		</form>
+	</table>
+</body>
+</html>

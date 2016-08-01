@@ -15,7 +15,14 @@
         <tbody>
             {% for port in ports %}
             <tr>
-                    <td>{{ port }}</td>
+                {% if port[1] == "closed" %}
+                    <td style="color:red;">{{ port[0] }}</td>
+                    <td style="color:red;">{{ port[1] }}</td>
+                {% else %}
+                    <td style="color:blue;">{{ port[0] }}</td>
+                    <td style="color:blue;">{{ port[1] }}</td>
+                {% endif %}
+                    
             </tr>
             {% endfor %}
         </tbody>

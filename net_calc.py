@@ -17,6 +17,7 @@ def nflbx(addr):
         Broadcast = Network.broadcast_address
         Last = Network.broadcast_address - 1
         neXt = Broadcast + 1
-        return Network, First, Last, Broadcast, neXt
+        hosts = Network.num_addresses
+        return Network, First, Last, Broadcast, neXt, hosts
     except:
         return 0

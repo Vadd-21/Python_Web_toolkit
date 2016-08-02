@@ -24,28 +24,22 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/scanner", methods=['get'])
-def results():
-    """
-    defines a page
-    """
-    return render_template("scanner.html")
-
-
-@app.route("/scan_results", methods=['get', 'post'])
+@app.route("/scanner", methods=['get', 'post'])
 def scan():
     """
     defines a page
     """
-    target = request.form['target']
-    s_port = int(request.form['s_port'])
-    e_port = int(request.form['e_port'])
-    ports = scanner(target, s_port, e_port)
     if request.method == 'POST':
+        try:
+            target = request.form['target']
+            s_port = int(request.form['s_port'])
+            e_port = int(request.form['e_port'])
+            ports = scanner(target, s_port, e_port)
+        except:
+            return render_template("scanner.html")
         return render_template("scan_results.html", target=target,
                                s_port=s_port, e_port=e_port, ports=ports)
-    results = None
-    return render_template("scanner.html", combatants=results)
+    return render_template("scanner.html")
 
 
 @app.route("/subnet_calc", methods=['get', 'post'])
@@ -58,7 +52,10 @@ def subnet():
         cidr = request.form['cidr']
         info = nflbx(address + "/" + cidr)
         if info:
-            return render_template("subnet_output.html", network=info[0], first=info[1], last=info[2], broadcast=info[3], neXt=info[4])
+            return render_template("subnet_output.html", network=info[0],
+                                   first=info[1], last=info[2],
+                                   broadcast=info[3], neXt=info[4],
+                                   hosts=info[5])
         return render_template("invalid_addr.html")
     return render_template("subnet_input.html")
 

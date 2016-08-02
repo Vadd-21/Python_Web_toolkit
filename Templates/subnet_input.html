@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TCP Port scanner</title>
+</head>
+<body>
+    <table border=1px>
+        <thead>
+            <tr>
+                <th>Address</th>
+                <th>CIDR</th>
+            </tr>
+        </thead>
+        <form action="subnet_calc" method="post">
+        <tbody>
+            <tr>
+                <td><input type="text", name='address', placeholder="192.168.1.0"></td>
+                <td><input type="text", name='cidr', placeholder="24"></td>
+                <td><input type="submit"></td>
+            </tr>
+        </tbody>
+        </form>
+    </table>
+</body>
+</html>

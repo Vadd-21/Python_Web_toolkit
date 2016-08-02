@@ -4,7 +4,7 @@ web frontend for SQL Queries of a backend database
 """
 from flask import Flask, render_template, request
 from scan import scanner
-
+from net_calc import nflbx
 app = Flask(__name__)
 
 
@@ -42,9 +42,26 @@ def scan():
     e_port = int(request.form['e_port'])
     ports = scanner(target, s_port, e_port)
     if request.method == 'POST':
-        return render_template("scan_results.html", target=target, s_port=s_port, e_port=e_port, ports=ports)
+        return render_template("scan_results.html", target=target,
+                               s_port=s_port, e_port=e_port, ports=ports)
     results = None
     return render_template("scanner.html", combatants=results)
+
+
+@app.route("/subnet_calc", methods=['get', 'post'])
+def subnet():
+    """
+    defines a page
+    """
+    if request.method == 'POST':
+        address = request.form['address']
+        cidr = request.form['cidr']
+        info = nflbx(address + "/" + cidr)
+        if info:
+            return render_template("subnet_output.html", network=info[0], first=info[1], last=info[2], broadcast=info[3], neXt=info[4])
+        return render_template("invalid_addr.html")
+    return render_template("subnet_input.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8050)

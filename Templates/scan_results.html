@@ -4,30 +4,40 @@
     <title>TCP Port scanner</title>
 </head>
 <body>
-    <table border=1px>
+    <table border=1px style="float: left;">
         <thead>
             <tr>
                 <th>target = {{target}}</th>
-                <th>start port = {{s_port}}</th>
-                <th>end port = {{e_port}}</th>
+                <th>Closed port(s)</th>
             </tr>
         </thead>
         <tbody>
             {% for port in ports %}
             <tr>
                 {% if port[1] == "closed" %}
-                    <td style="color:red;">{{ port[0] }}</td>
-                    <td style="color:red;">{{ port[1] }}</td>
-                {% else %}
-                    <td style="color:blue;">{{ port[0] }}</td>
-                    <td style="color:blue;">{{ port[1] }}</td>
+                    <td></td>
+                    <td style="color:red;"><a href="http://www.speedguide.net/port.php?port={{port[0]}}">{{ port[0] }} - {{ port[1] }}</a></td>
                 {% endif %}
-                    
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <h1><a href="/scanner">start</a></h1>
+    <table border=1px style="float: left;">
+        <thead>
+            <tr>
+                <th>Open Port(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for port in ports %}
+                {% if port[1] == "open" %}
+                    <tr>
+                        <td style="color:blue;"><a href="http://www.speedguide.net/port.php?port={{port[0]}}">{{ port[0] }} - {{ port[1] }}</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
 
 </body>
 </html>
